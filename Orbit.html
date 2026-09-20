@@ -664,9 +664,8 @@
             <h3>Model settings</h3>
             <div class="field">
                 <label for="rInc">Orbit inclination <output id="oInc"></output></label>
-                <input type="range" id="rInc" min="26.0" max="27.5" step="0.1" value="26.5">
-                <small>SpaceX has not published this. Recent Starship flights flew 26.3 to 26.8 degrees. Orbit 5 stays
-                    the closest pass across this whole range.</small>
+                <input type="range" id="rInc" min="26.0" max="35.0" step="0.1" value="33.0">
+                <small>SpaceX has not published the final inclination. Range extended to 35 degrees. At 33 degrees, Orbit 3 makes the closest pass over South India.</small>
             </div>
             <div class="field">
                 <label for="rLaunch">Liftoff time in the window <output id="oLaunch"></output></label>
@@ -918,7 +917,7 @@ function analyze(P, nOrbits, tEnd) {
         const TAIL_COLOR = '#93a8bd';
         const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        const S = { inc: 26.5, launchOffsetMin: 0, t: 0, playing: false, speed: 600, follow: false };
+        const S = { inc: 33.0, launchOffsetMin: 0, t: 0, playing: false, speed: 600, follow: false };
         const view = { lon: 78, lat: 12, zoom: 3 };
         let tween = null;
         let P, A, segs = [], bestT = 0, launchMs = BASE_LAUNCH;
@@ -1330,7 +1329,7 @@ function analyze(P, nOrbits, tEnd) {
         $('bWorld').addEventListener('click', () => { setFollow(false); flyTo(view.lon, 10, 1.0); });
         $('rInc').addEventListener('input', e => { S.inc = +e.target.value; rebuild(); });
         $('rLaunch').addEventListener('input', e => { S.launchOffsetMin = +e.target.value; rebuild(); });
-        $('bReset').addEventListener('click', () => { S.inc = 26.5; S.launchOffsetMin = 0; $('rInc').value = 26.5; $('rLaunch').value = 0; rebuild(); });
+        $('bReset').addEventListener('click', () => { S.inc = 33.0; S.launchOffsetMin = 0; $('rInc').value = 33.0; $('rLaunch').value = 0; rebuild(); });
         window.addEventListener('keydown', e => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target === tl) return;
             if (e.code === 'Space') { e.preventDefault(); $('bPlay').click(); }
